@@ -24,5 +24,9 @@
 }
 .Search-container button {
   font-size: 1.5rem;
-  margin-top: 15px
+  margin-top: 15px;
+}
+
+.SearchResults {
+  margin-top: 30px;
 }
