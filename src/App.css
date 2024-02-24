@@ -2,14 +2,27 @@
   text-align: center;
 }
 
-.App-header {
+.App-body {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 20px;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
+.Search-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.Search-container textarea {
+  font-size: 1rem;
+  resize:none;
+}
+.Search-container button {
+  font-size: 1.5rem;
+  margin-top: 15px
+}
