@@ -1,8 +1,8 @@
-
 import { useState } from "react";
 import "./App.css";
 
 import { SearchResults } from "./SearchResults";
+import { generateRavelrySearchTerms } from "./helpers/openai";
 import { searchRavelry } from "./helpers/ravelry";
 
 function App() {
@@ -11,16 +11,27 @@ function App() {
   const [resultsLoading, setResultsLoading] = useState(false);
   const [results, setResults] = useState(undefined);
 
-  const onSearch = () => {
+  const onSearch = async () => {
+    if (resultsLoading) {
+      return;
+    }
     setSearchQuery(textareaValue);
     setResultsLoading(true);
     setResults(undefined);
-    searchRavelry(textareaValue).then((res) => {
+
+    try {
+      const searchTerms = await generateRavelrySearchTerms(textareaValue);
+    console.log(typeof searchTerms);
+      const { patterns } = await searchRavelry(searchTerms);
       // TODO add pagination
-      // TODO add better types for loading/loaded state
-      setResults(res.patterns);
-      setResultsLoading(false);
-    });
+      // TODO add better types for loading/loaded state / error handling
+      setResults(patterns);
+    } catch (err){
+      console.error(err)
+      setResults([]);
+    }
+
+    setResultsLoading(false);
   };
 
   return (
@@ -31,6 +42,7 @@ function App() {
           <textarea
             rows="4"
             cols="50"
+            maxLength={200}
             value={textareaValue}
             onChange={(e) => setTextAreaValue(e.target.value)}
             onKeyDown={(e) => {

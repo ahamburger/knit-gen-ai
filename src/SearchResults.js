@@ -8,6 +8,7 @@ export function SearchResults({ searchQuery, resultsLoading, results }) {
         {resultsLoading ? (
           "Loading..."
         ) : (
+          results.length === 0 ? "No results found" :
           <ul className="ResultsList">
             {results.map((pattern) => {
               return (
@@ -25,6 +26,7 @@ export function SearchResults({ searchQuery, resultsLoading, results }) {
               );
             })}
           </ul>
+            // TODO add link to easily open search on Ravelry
         )}
       </div>
     )
