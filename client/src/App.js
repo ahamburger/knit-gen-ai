@@ -2,8 +2,6 @@ import { useState } from "react";
 import "./App.css";
 
 import { SearchResults } from "./SearchResults";
-import { generateRavelrySearchTerms } from "./helpers/openai";
-import { searchRavelry } from "./helpers/ravelry";
 
 function App() {
   const [textareaValue, setTextAreaValue] = useState();
@@ -19,15 +17,18 @@ function App() {
     setResultsLoading(true);
     setResults(undefined);
 
+    const fetchParams = new URLSearchParams({ input: textareaValue });
+
     try {
-      const searchTerms = await generateRavelrySearchTerms(textareaValue);
-    console.log(typeof searchTerms);
-      const { patterns } = await searchRavelry(searchTerms);
-      // TODO add pagination
-      // TODO add better types for loading/loaded state / error handling
-      setResults(patterns);
-    } catch (err){
-      console.error(err)
+      const res = await fetch(`/search?${fetchParams}`);
+      if (res.ok()) {
+        const { patterns } = await res.json();
+        // TODO add pagination
+        // TODO add better types for loading/loaded state / error handling
+        setResults(patterns);
+      }
+    } catch (err) {
+      console.error(err);
       setResults([]);
     }
 

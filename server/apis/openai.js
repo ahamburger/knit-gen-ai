@@ -1,14 +1,13 @@
-import OpenAI from "openai";
-import { paList, fitList, pcList } from "./ravelry-constants";
+const OpenAI = require("openai");
+const { paList, fitList, pcList } = require("./ravelry-constants");
 
-const openai = new OpenAI({
-  apiKey: process.env.REACT_APP_OPEN_AI_KEY,
-  // TODO move to node (ASAP!)
-  dangerouslyAllowBrowser: true,
-});
 
 /** takes the user-inputted search term and turns it into search parameters to be sent to the Ravelry API*/
-export async function generateRavelrySearchTerms(userSearchQuery) {
+async function generateRavelrySearchTerms(userSearchQuery) {
+  const openai = new OpenAI({
+    apiKey: process.env.REACT_APP_OPEN_AI_KEY
+  });
+  
   const systemPrompt = `You are a knitting pattern recommendation service. You will be provided with a triple-quote delimited input and asked to turn that into a JSON blob of search terms that can later be passed to the Ravelry API. You need to transform natural language qualifiers into search terms. 
 
   For example if someone asks for "comfy" consider things like the fit, yarn fiber and/or needle size that would make a sweater comfy 
@@ -37,8 +36,6 @@ export async function generateRavelrySearchTerms(userSearchQuery) {
     Only give the JSON blob, with no other text. \
     Only use the keys explained above.`;
 
-  console.log(systemPrompt);
-
   // TODO allow chat to return arrays for the keys
   const completion = await openai.chat.completions.create({
     messages: [
@@ -54,7 +51,7 @@ export async function generateRavelrySearchTerms(userSearchQuery) {
   // TODO check 'finish_reason' before parsing
   // TODO better error handling
   try {
-    const response = JSON.parse(`${completion.choices[0].message.content}`);
+    const response = JSON.parse(completion.choices[0].message.content);
     console.log("Chat GPT parsed response", { response });
     return { ...response, craft: "knitting" };
   } catch (err) {
@@ -62,3 +59,5 @@ export async function generateRavelrySearchTerms(userSearchQuery) {
     throw err;
   }
 }
+
+module.exports = { generateRavelrySearchTerms }

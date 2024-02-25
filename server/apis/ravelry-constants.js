@@ -1,8 +1,8 @@
 // subset of pc options
-export const pcList = ['coat','dress','leggings','onesies','pants','bra','pasties','underwear','other-intimateapparel','robe','shorts','shrug','sleepwear','skirt','soakers','cardigan','other-sweater','pullover','sweater','swimwear','tops','sleeveless-top','strapless-top','tee','other-top','vest',]
+const pcList = ['coat','dress','leggings','onesies','pants','bra','pasties','underwear','other-intimateapparel','robe','shorts','shrug','sleepwear','skirt','soakers','cardigan','other-sweater','pullover','sweater','swimwear','tops','sleeveless-top','strapless-top','tee','other-top','vest',]
 
 // subset of pa options
-export const paList = [
+const paList = [
   "other-colorwork",
   "stranded",
   "stripes-colorwork",
@@ -130,7 +130,7 @@ export const paList = [
   "bobble-or-popcorn",
 ];
 
-export const fitList = [
+const fitList = [
   "adult",
   "baby",
   "child",
@@ -153,3 +153,5 @@ export const fitList = [
   "male",
   "unisex",
 ];
+
+module.exports = { paList, pcList, fitList }

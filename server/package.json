@@ -1,0 +1,19 @@
+{
+  "name": "knit-gen-ai",
+  "version": "1.0.0",
+  "description": "Input a natural language description of what kind of knitting project you'd like to make (ie: \"cozy fall sweater with a vneck\"), and a list of patterns from Ravelry will be shown.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "nodemon": "^3.1.0",
+    "openai": "^4.28.0"
+  }
+}

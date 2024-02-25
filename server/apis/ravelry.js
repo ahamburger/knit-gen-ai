@@ -2,7 +2,7 @@ const ravelryUsername = "read-881cd3edb850ed671d7c53fcfe2c51bd";
 
 const ravelryUrl = "https://api.ravelry.com";
 
-export async function searchRavelry(searchParameters) {
+async function searchRavelry(searchParameters) {
   const headers = new Headers();
 
   const ravelryKey = process.env.REACT_APP_RAVELRY_KEY;
@@ -22,6 +22,13 @@ export async function searchRavelry(searchParameters) {
     `${ravelryUrl}/patterns/search.json?${parameters}`,
     { method: "GET", headers: headers }
   );
-
-  return await response.json();
+  
+  try {
+    return await response.json();
+  } catch {
+    console.error('Error parsing response from Ravelry', response.status)
+    return []
+  }
 }
+
+module.exports = { searchRavelry }
