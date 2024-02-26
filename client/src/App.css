@@ -1,27 +1,39 @@
 .App {
   text-align: center;
-}
-
-.App-body {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   padding: 20px;
   font-size: calc(10px + 2vmin);
   color: white;
+  box-sizing: border-box;
+}
+
+footer {
+  color: white;
+  font-size: .9rem;
+  margin-top: 15px
+}
+
+footer p {
+  margin-top: 0
 }
 
 .Search-container {
   display: flex;
   flex-direction: column;
+  max-width: 500px;
+  margin: auto;
 }
 
 .Search-container textarea {
   font-size: 1rem;
-  resize:none;
+  resize: none;
 }
+
 .Search-container button {
   font-size: 1.5rem;
   margin-top: 15px;
@@ -40,7 +52,7 @@
 }
 
 ul {
-  margin: auto
+  margin: auto;
 }
 
 .ResultsList li {

@@ -27,7 +27,7 @@ function App() {
         // TODO add pagination
         // TODO add better types for loading/loaded state / error handling
         setPatterns(patterns);
-        setRavelrySearchTerms(ravelrySearchTerms)
+        setRavelrySearchTerms(ravelrySearchTerms);
       }
     } catch (err) {
       console.error(err);
@@ -39,7 +39,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-body">
+      <div className="App-content">
         <p>What do you want to knit?</p>
         <div className="Search-container">
           <textarea
@@ -63,7 +63,12 @@ function App() {
           results={patterns}
           ravelrySearchTerms={ravelrySearchTerms}
         />
-      </header>
+      </div>
+      <footer>
+        <p>
+          Made by <a href="https://github.com/ahamburger">Allison Hamburger</a>
+        </p>
+      </footer>
     </div>
   );
 }
