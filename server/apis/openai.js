@@ -56,8 +56,7 @@ async function generateRavelrySearchTerms(userSearchQuery) {
     console.log("Chat GPT parsed response", { response });
     return { ...response, craft: "knitting" };
   } catch (err) {
-    console.log("Raw response", completion.choices[0].message.content);
-    throw err;
+    console.log("Error with ChatGPT response. Raw response", completion.choices[0].message.content);
   }
 }
 
