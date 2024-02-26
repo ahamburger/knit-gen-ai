@@ -1,5 +1,53 @@
 // subset of pc options
-const pcList = ['coat','dress','leggings','onesies','pants','bra','pasties','underwear','other-intimateapparel','robe','shorts','shrug','sleepwear','skirt','soakers','cardigan','other-sweater','pullover','sweater','swimwear','tops','sleeveless-top','strapless-top','tee','other-top','vest',]
+const pcList = [
+  "coat",
+  "dress",
+  "leggings",
+  "onesies",
+  "pants",
+  "bra",
+  "pasties",
+  "underwear",
+  "other-intimateapparel",
+  "robe",
+  "shorts",
+  "shrug",
+  "sleepwear",
+  "skirt",
+  "soakers",
+  "cardigan",
+  "other-sweater",
+  "pullover",
+  "sweater",
+  "swimwear",
+  "tops",
+  "sleeveless-top",
+  "strapless-top",
+  "tee",
+  "other-top",
+  "vest",
+  "socks",
+  "convertible",
+  "cuffs",
+  "fingerless",
+  "gloves",
+  "mittens",
+  "muff",
+  "other-hands",
+  "backpack",
+  "clutch",
+  "drawstring",
+  "duffle",
+  "laptop",
+  "messenger",
+  "market",
+  "money",
+  "tote",
+  "other-bag",
+  "wristlet",
+  "purse",
+  "pet-clothing",
+];
 
 // subset of pa options
 const paList = [
@@ -154,4 +202,4 @@ const fitList = [
   "unisex",
 ];
 
-module.exports = { paList, pcList, fitList }
+module.exports = { paList, pcList, fitList };

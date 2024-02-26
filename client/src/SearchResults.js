@@ -8,7 +8,7 @@ export function SearchResults({
     ? `https://www.ravelry.com/patterns/search#${ravelrySearchTerms}`
     : undefined;
 
-  console.log(results[0])
+
   return (
     searchQuery && (
       <div className="SearchResults">

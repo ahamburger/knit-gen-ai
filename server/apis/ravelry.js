@@ -19,8 +19,8 @@ async function searchRavelry(searchParameters) {
   for (const key in searchParameters) {
     // TODO validate that value is ok for pa, pc, and fit
 
-    if (Array.isArray(searchParameters[key])){
-      searchParameters[key] = searchParameters[key].join('|')
+    if (Array.isArray(searchParameters[key])) {
+      searchParameters[key] = searchParameters[key].join("|");
     }
   }
 
@@ -29,7 +29,6 @@ async function searchRavelry(searchParameters) {
     page_size: 10,
   });
 
-  // console.log(`${ravelryUrl}/patterns/search.json?${urlParameters}`)
   const response = await fetch(
     `${ravelryUrl}/patterns/search.json?${parameters}`,
     { method: "GET", headers: headers }
@@ -39,7 +38,7 @@ async function searchRavelry(searchParameters) {
   const ravelrySearchTerms = parameters.toString();
 
   try {
-    const {patterns} = await response.json();
+    const { patterns } = await response.json();
 
     return { patterns, ravelrySearchTerms };
   } catch {

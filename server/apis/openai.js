@@ -12,16 +12,16 @@ async function generateRavelrySearchTerms(userSearchQuery) {
 
   For example if someone asks for "comfy" consider things like the fit, yarn fiber and/or needle size that would make a sweater comfy 
 
-    Here are the allowed keys in the JSON. All of the keys accept a list of strings, except pc which just accepts a single string. I will list them as follows key---description 
+    Here are the allowed keys in the JSON. All of the keys accept a list of strings. I will list them as follows key---description 
     
     I will list them as follows key---description 
-        pc---Stands for pattern category, the kind of object the user wants to make. Only use the following comma-separated values ${pcList.join(
+        pc---Stands for pattern category, the kind of object the user wants to make. Do not use any values other than the following comma-separated values ${pcList.join(
           ","
-        )}. 
-        pa--Stands for pattern attribute. Use this for construction and colorwork requests and design elements such as sleeve shape or neckline shape. Only use the following comma-separated values: ${paList.join(
+        )} 
+        pa--Stands for pattern attribute. Use this for construction and colorwork requests and design elements such as sleeve shape or neckline shape. Do not use any values other than the following comma-separated values: ${paList.join(
           ","
         )}
-        fit--Accepts values related to the age, gender, fit, and ease. Only use the following comma-separated values: ${fitList.join(
+        fit--Accepts values related to the age, gender, fit, and ease. Do not use any values other than the following comma-separated values: ${fitList.join(
           ","
         )}
         weight--Yarn weight, for example: DK, worsted, aran.
@@ -34,7 +34,7 @@ async function generateRavelrySearchTerms(userSearchQuery) {
         
     Give the search terms for the Ravelry Search API based on the user inputted text. \
     Only give the JSON blob, with no other text. \
-    Only use the keys explained above.`;
+    Only use the keys explained above. Do not use any other keys.`;
 
   // TODO allow chat to return arrays for the keys
   const completion = await openai.chat.completions.create({

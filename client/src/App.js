@@ -40,7 +40,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-body">
-        <p>What kind of pattern are you looking for?</p>
+        <p>What do you want to knit?</p>
         <div className="Search-container">
           <textarea
             rows="4"
