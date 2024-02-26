@@ -47,6 +47,19 @@ const pcList = [
   "wristlet",
   "purse",
   "pet-clothing",
+  "hat",
+  "balaclava",
+  "beanie-toque",
+  "beret-tam",
+  "billed",
+  "brimmed",
+  "cloche",
+  "earflap",
+  "stocking",
+  "yarmulke",
+  "other-hat",
+  "pixie",
+  "bonnet",
 ];
 
 // subset of pa options
