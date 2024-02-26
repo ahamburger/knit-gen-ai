@@ -7,7 +7,8 @@ function App() {
   const [textareaValue, setTextAreaValue] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [resultsLoading, setResultsLoading] = useState(false);
-  const [results, setResults] = useState(undefined);
+  const [patterns, setPatterns] = useState(undefined);
+  const [ravelrySearchTerms, setRavelrySearchTerms] = useState(undefined);
 
   const onSearch = async () => {
     if (resultsLoading) {
@@ -15,21 +16,22 @@ function App() {
     }
     setSearchQuery(textareaValue);
     setResultsLoading(true);
-    setResults(undefined);
+    setPatterns(undefined);
 
     const fetchParams = new URLSearchParams({ input: textareaValue });
 
     try {
       const res = await fetch(`/search?${fetchParams}`);
-      if (res.ok()) {
-        const { patterns } = await res.json();
+      if (res.ok) {
+        const { patterns, ravelrySearchTerms } = await res.json();
         // TODO add pagination
         // TODO add better types for loading/loaded state / error handling
-        setResults(patterns);
+        setPatterns(patterns);
+        setRavelrySearchTerms(ravelrySearchTerms)
       }
     } catch (err) {
       console.error(err);
-      setResults([]);
+      setPatterns([]);
     }
 
     setResultsLoading(false);
@@ -58,7 +60,8 @@ function App() {
         <SearchResults
           searchQuery={searchQuery}
           resultsLoading={resultsLoading}
-          results={results}
+          results={patterns}
+          ravelrySearchTerms={ravelrySearchTerms}
         />
       </header>
     </div>

@@ -16,19 +16,36 @@ async function searchRavelry(searchParameters) {
     "Basic " + btoa(`${ravelryUsername}:${ravelryKey}`)
   );
 
-  const parameters = new URLSearchParams({ ...searchParameters, page_size: 10})
+  for (const key in searchParameters) {
+    // TODO validate that value is ok for pa, pc, and fit
 
+    if (Array.isArray(searchParameters[key])){
+      searchParameters[key] = searchParameters[key].join('|')
+    }
+  }
+
+  const parameters = new URLSearchParams({
+    ...searchParameters,
+    page_size: 10,
+  });
+
+  // console.log(`${ravelryUrl}/patterns/search.json?${urlParameters}`)
   const response = await fetch(
     `${ravelryUrl}/patterns/search.json?${parameters}`,
     { method: "GET", headers: headers }
   );
-  
+
+  parameters.delete("page_size");
+  const ravelrySearchTerms = parameters.toString();
+
   try {
-    return await response.json();
+    const {patterns} = await response.json();
+
+    return { patterns, ravelrySearchTerms };
   } catch {
-    console.error('Error parsing response from Ravelry', response.status)
-    return []
+    console.error("Error parsing response from Ravelry", response.status);
+    return { patterns: [], ravelrySearchTerms };
   }
 }
 
-module.exports = { searchRavelry }
+module.exports = { searchRavelry };

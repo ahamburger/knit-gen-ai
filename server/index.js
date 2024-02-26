@@ -22,7 +22,7 @@ app.get("/search", async (req, res) => {
   }
 
   const searchTerms = await generateRavelrySearchTerms(input.slice(0, 200))
-  const { patterns } = await searchRavelry(searchTerms)
+  const result = await searchRavelry(searchTerms)
 
-  res.json({ patterns });
+  res.json(result);
 });

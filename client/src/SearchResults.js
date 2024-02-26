@@ -1,4 +1,14 @@
-export function SearchResults({ searchQuery, resultsLoading, results }) {
+export function SearchResults({
+  searchQuery,
+  resultsLoading,
+  results,
+  ravelrySearchTerms,
+}) {
+  const ravelryUrl = ravelrySearchTerms
+    ? `https://www.ravelry.com/patterns/search#${ravelrySearchTerms}`
+    : undefined;
+
+  console.log(results[0])
   return (
     searchQuery && (
       <div className="SearchResults">
@@ -8,25 +18,34 @@ export function SearchResults({ searchQuery, resultsLoading, results }) {
         {resultsLoading ? (
           "Loading..."
         ) : (
-          results.length === 0 ? "No results found" :
-          <ul className="ResultsList">
-            {results.map((pattern) => {
-              return (
-                <li key={pattern.id}>
-                  {pattern.first_photo?.small_url && (
-                    <img width="100px" src={pattern.first_photo?.small_url} />
-                  )}
-                  <a
-                    href={`https://www.ravelry.com/patterns/library/${pattern.id}`}
-                  >
-                    {pattern.name}
-                  </a>
-                  {` by ${pattern.pattern_author.name}`}
-                </li>
-              );
-            })}
-          </ul>
-            // TODO add link to easily open search on Ravelry
+          <div className="ResultsList">
+            {results.length === 0 ? (
+              "No results found"
+            ) : (
+              <ul>
+                {results.map((pattern) => {
+                  return (
+                    <li key={pattern.id}>
+                      {pattern.first_photo?.small_url && (
+                        <img
+                          width="100px"
+                          src={pattern.first_photo.small_url}
+                          alt={pattern.first_photo.caption || `Image of ${pattern.name}`}
+                        />
+                      )}
+                      <a
+                        href={`https://www.ravelry.com/patterns/library/${pattern.id}`}
+                      >
+                        {pattern.name}
+                      </a>
+                      {` by ${pattern.pattern_author.name}`}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+            {ravelryUrl && <p className="RavelryUrl"> <a href={ravelryUrl}>{ravelryUrl}</a></p>}
+          </div>
         )}
       </div>
     )
