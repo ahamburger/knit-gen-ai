@@ -73,3 +73,7 @@ a {
 .RavelryUrl {
   margin-top: 30px
 }
+
+.ErrorMessage {
+  color: firebrick;
+}

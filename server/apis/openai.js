@@ -35,7 +35,6 @@ async function generateRavelrySearchTerms(userSearchQuery) {
     Only give the JSON blob, with no other text. \
     Only use the keys explained above. Do not use any other keys.`;
 
-  // TODO allow chat to return arrays for the keys
   const completion = await openai.chat.completions.create({
     messages: [
       {
@@ -47,8 +46,10 @@ async function generateRavelrySearchTerms(userSearchQuery) {
     model: "gpt-4",
   });
 
-  // TODO check 'finish_reason' before parsing
-  // TODO better error handling
+  if (completion.choices[0]?.finish_reason !== "stop") {
+    throw new Error(`Chat completion finish_reason was ${completion.finish_reason}`)
+  }
+
   try {
     const response = filterInvalidValues(
       JSON.parse(completion.choices[0].message.content)
@@ -56,7 +57,7 @@ async function generateRavelrySearchTerms(userSearchQuery) {
     console.log("Chat GPT parsed response", { response });
     return { ...response, craft: "knitting" };
   } catch (err) {
-    console.log("Error with ChatGPT response. Raw response", completion.choices[0].message.content);
+    throw new Error(`Error parsing chat completion. Raw response: ${completion.choices[0]?.message?.content}`)
   }
 }
 

@@ -16,13 +16,17 @@ app.listen(PORT, () => {
 
 app.get("/search", async (req, res) => {
   const input = req.query.input;
-
   if (typeof input !== 'string') {
-    throw new Error('Invalid user input')
+    res.status(400).send('Invalid user input')
+    return
   }
 
-  const searchTerms = await generateRavelrySearchTerms(input.slice(0, 200))
-  const result = await searchRavelry(searchTerms)
+  try {
+    const searchTerms = await generateRavelrySearchTerms(input.slice(0, 200))
+    const result = await searchRavelry(searchTerms)
 
-  res.json(result);
+    res.json(result);
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
 });

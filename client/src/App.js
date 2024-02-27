@@ -7,6 +7,7 @@ function App() {
   const [textareaValue, setTextAreaValue] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [resultsLoading, setResultsLoading] = useState(false);
+  const [errorFetchingResults, setErrorFetchingResults] = useState(false);
   const [patterns, setPatterns] = useState(undefined);
   const [ravelrySearchTerms, setRavelrySearchTerms] = useState(undefined);
 
@@ -16,21 +17,27 @@ function App() {
     }
     setSearchQuery(textareaValue);
     setResultsLoading(true);
+    setErrorFetchingResults(false);
     setPatterns(undefined);
 
     const fetchParams = new URLSearchParams({ input: textareaValue });
+    const res = await fetch(`/search?${fetchParams}`)
 
-    try {
-      const res = await fetch(`/search?${fetchParams}`);
-      if (res.ok) {
+    if (res.ok) {
+      try {
         const { patterns, ravelrySearchTerms } = await res.json();
         // TODO add pagination
-        // TODO add better types for loading/loaded state / error handling
         setPatterns(patterns);
         setRavelrySearchTerms(ravelrySearchTerms);
+      } catch (err) {
+        setErrorFetchingResults(true);
+        console.error('Error parsing res.json', err)
+        setPatterns([]);
       }
-    } catch (err) {
-      console.error(err);
+
+    } else {
+      setErrorFetchingResults(true);
+      console.error('Error with search request', res.status)
       setPatterns([]);
     }
 
@@ -60,6 +67,7 @@ function App() {
         <SearchResults
           searchQuery={searchQuery}
           resultsLoading={resultsLoading}
+          showErrorMessage={errorFetchingResults}
           results={patterns}
           ravelrySearchTerms={ravelrySearchTerms}
         />
