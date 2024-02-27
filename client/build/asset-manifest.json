@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.48c72450.css",
-    "main.js": "/static/js/main.c2155801.js",
-    "static/js/453.5f3308f9.chunk.js": "/static/js/453.5f3308f9.chunk.js",
-    "index.html": "/index.html",
-    "main.48c72450.css.map": "/static/css/main.48c72450.css.map",
-    "main.c2155801.js.map": "/static/js/main.c2155801.js.map",
-    "453.5f3308f9.chunk.js.map": "/static/js/453.5f3308f9.chunk.js.map"
+    "main.css": "/knit-gen-ai/static/css/main.48c72450.css",
+    "main.js": "/knit-gen-ai/static/js/main.eaabb374.js",
+    "static/js/453.5f3308f9.chunk.js": "/knit-gen-ai/static/js/453.5f3308f9.chunk.js",
+    "index.html": "/knit-gen-ai/index.html",
+    "main.48c72450.css.map": "/knit-gen-ai/static/css/main.48c72450.css.map",
+    "main.eaabb374.js.map": "/knit-gen-ai/static/js/main.eaabb374.js.map",
+    "453.5f3308f9.chunk.js.map": "/knit-gen-ai/static/js/453.5f3308f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.48c72450.css",
-    "static/js/main.c2155801.js"
+    "static/js/main.eaabb374.js"
   ]
 }
