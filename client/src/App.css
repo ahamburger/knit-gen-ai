@@ -1,6 +1,33 @@
+p,
+a,
+li,
+textarea {
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: normal;
+  color: #027371
+}
+
+button {
+  font-size: 1.1rem;
+}
+
+a {
+  color: #027371
+}
+
+textarea {
+  font-family: inherit;
+  resize: none;
+  padding: 5px;
+}
+
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #F5F5F5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,18 +35,13 @@
   justify-content: space-between;
   padding: 20px;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
   box-sizing: border-box;
 }
 
-footer {
-  color: white;
-  font-size: .9rem;
-  margin-top: 15px
-}
-
+footer a,
 footer p {
-  margin-top: 0
+  font-size: .5rem;
 }
 
 .Search-container {
@@ -29,19 +51,16 @@ footer p {
   margin: auto;
 }
 
-.Search-container textarea {
-  font-size: 1rem;
-  resize: none;
-}
-
 .Search-container button {
-  font-size: 1.5rem;
-  margin-top: 15px;
+  margin: 15px auto;
 }
 
 .SearchResults {
-  font-size: 1.5rem;
-  margin-top: 30px;
+  background: white;
+  border-radius: 5px;
+  padding: 15px;
+  position: relative;
+  width: 800px
 }
 
 .ResultsList {
@@ -51,7 +70,7 @@ footer p {
   flex-direction: column;
 }
 
-ul {
+.ResultsList ul {
   margin: auto;
 }
 
@@ -66,12 +85,9 @@ ul {
   margin-right: 20px;
 }
 
-a {
-  color: #ccc
-}
-
 .RavelryUrl {
-  margin-top: 30px
+  margin-top: 30px;
+  font-size: .9rem;
 }
 
 .ErrorMessage {

@@ -9,7 +9,6 @@ export function SearchResults({
     ? `https://www.ravelry.com/patterns/search#${ravelrySearchTerms}`
     : undefined;
 
-
   return (
     searchQuery && (
       <div className="SearchResults">
@@ -17,12 +16,12 @@ export function SearchResults({
           Search results for: <i>{searchQuery}</i>
         </p>
         {resultsLoading ? (
-          "Loading..."
+          <p>Loading...</p>
         ) : (
           <div className="ResultsList">
             {showErrorMessage ? <p className="ErrorMessage">Error getting patterns. Please try again.</p> :
               results.length === 0 ? (
-                "No results found"
+                <p>No results found</p>
               ) : (
                 <ul>
                   {results.map((pattern) => {
@@ -46,9 +45,9 @@ export function SearchResults({
                   })}
                 </ul>
               )}
-            {ravelryUrl && <p className="RavelryUrl"> <a href={ravelryUrl}>{ravelryUrl}</a></p>}
           </div>
         )}
+        {ravelryUrl && <p className="RavelryUrl"><a href={ravelryUrl}>Open on Ravelry</a></p>}
       </div>
     )
   );

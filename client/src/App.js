@@ -50,7 +50,7 @@ function App() {
   return (
     <div className="App">
       <div className="App-content">
-        <p role="heading" aria-level="1">What do you want to knit?</p>
+        <h1>What do you want to knit?</h1>
         <div className="Search-container">
           <textarea
             rows="4"
