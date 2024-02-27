@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-const allowlist = ['http://localhost:3000', 'https://ahamburger.github.io/knit-gen-ai']
+const allowlist = ['http://localhost:3000', 'https://ahamburger.github.io']
 const corsOptionsDelegate = function (req, callback) {
   let corsOptions;
   if (allowlist.indexOf(req.header('Origin')) !== -1) {
