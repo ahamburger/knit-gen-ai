@@ -1,5 +1,7 @@
 # Knit Pattern Search Helper
 
+[https://ahamburger.github.io/knit-gen-ai/](https://ahamburger.github.io/knit-gen-ai/)
+
 Input a natural language description of what kind of knitting project you'd like to make (ie: "cozy winter socks", "easy colorful mittens", "warm vest for my dog"), and a list of patterns from Ravelry will be shown.
 
 Under the hood, the inputted description is being passed through ChatGPT to generate search terms that can be sent to the Ravelry API.
