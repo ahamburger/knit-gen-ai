@@ -6,7 +6,7 @@ import { SearchResults } from "./SearchResults";
 const placeholderList = ["cozy winter socks", "easy colorful mittens", "warm vest for my dog", "sleeveless dress", "summer top for my toddler", "complicated socks"]
 const randomPlaceholder = placeholderList[Math.floor(Math.random() * placeholderList.length)]
 
-const baseUrl = process.env.REACT_APP_BASE_URL || "https://knit-gen-ai-a61a595cf707.herokuapp.com"
+const baseUrl = "https://knit-gen-ai-a61a595cf707.herokuapp.com"
 
 function App() {
   const [textareaValue, setTextAreaValue] = useState();
