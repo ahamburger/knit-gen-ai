@@ -6,6 +6,8 @@ import { SearchResults } from "./SearchResults";
 const placeholderList = ["cozy winter socks", "easy colorful mittens", "warm vest for my dog", "sleeveless dress", "summer top for my toddler", "complicated socks"]
 const randomPlaceholder = placeholderList[Math.floor(Math.random() * placeholderList.length)]
 
+const baseUrl = process.env.REACT_APP_BASE_URL || "https://knit-gen-ai-a61a595cf707.herokuapp.com"
+
 function App() {
   const [textareaValue, setTextAreaValue] = useState();
   const [searchQuery, setSearchQuery] = useState();
@@ -24,7 +26,7 @@ function App() {
     setPatterns(undefined);
 
     const fetchParams = new URLSearchParams({ input: textareaValue });
-    const res = await fetch(`/search?${fetchParams}`)
+    const res = await fetch(`${baseUrl}/search?${fetchParams}`)
 
     if (res.ok) {
       try {
