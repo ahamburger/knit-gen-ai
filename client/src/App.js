@@ -3,6 +3,9 @@ import "./App.css";
 
 import { SearchResults } from "./SearchResults";
 
+const placeholderList = ["cozy winter socks", "easy colorful mittens", "warm vest for my dog", "sleeveless dress", "summer top for my toddler", "complicated socks"]
+const randomPlaceholder = placeholderList[Math.floor(Math.random() * placeholderList.length)]
+
 function App() {
   const [textareaValue, setTextAreaValue] = useState();
   const [searchQuery, setSearchQuery] = useState();
@@ -47,7 +50,7 @@ function App() {
   return (
     <div className="App">
       <div className="App-content">
-        <p>What do you want to knit?</p>
+        <p role="heading" aria-level="1">What do you want to knit?</p>
         <div className="Search-container">
           <textarea
             rows="4"
@@ -61,6 +64,8 @@ function App() {
                 e.preventDefault();
               }
             }}
+            aria-label="Enter a description of a knitting pattern"
+            placeholder={`Try "${randomPlaceholder}"`}
           />
           <button onClick={onSearch}>Search</button>
         </div>
