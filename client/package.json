@@ -2,7 +2,6 @@
   "name": "knit-gen-ai",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
   "homepage": "https://ahamburger.github.io/knit-gen-ai",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -16,9 +15,9 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d ../build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build; mv -rf build/ ..",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
