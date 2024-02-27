@@ -60,6 +60,11 @@ const pcList = [
   "other-hat",
   "pixie",
   "bonnet",
+  "blanket",
+  "babyblanket", 
+  "bedspread", 
+  "throw", 
+  "other-blanket"
 ];
 
 // subset of pa options
