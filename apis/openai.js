@@ -1,5 +1,5 @@
 const OpenAI = require("openai");
-const { paList, fitList, pcList } = require("./ravelry-constants");
+const { paList, fitList, pcList, weightList } = require("./ravelry-constants");
 
 /** keys included in the prompt */
 const validKeys = ['pc', 'pa','fit', 'weight', 'colors', 'fibertype', 'needles', 'ratings', 'difficulties', 'language']
@@ -10,7 +10,7 @@ async function generateRavelrySearchTerms(userSearchQuery) {
     apiKey: process.env.REACT_APP_OPEN_AI_KEY,
   });
 
-  const systemPrompt = `You are a knitting pattern recommendation service. You will be provided with a triple-quote delimited input and asked to turn that into a JSON blob of search terms that can later be passed to the Ravelry API. You need to transform natural language qualifiers into search terms. 
+  const systemPrompt = `You are a knitting pattern recommendation service. You will be provided with a user input and asked to turn that into a JSON blob of search terms that can later be passed to the Ravelry API. You need to transform natural language qualifiers into search terms. 
 
   For example if someone asks for "comfy" consider things like the fit, yarn fiber and/or needle size that would make a sweater comfy 
 
@@ -26,7 +26,9 @@ async function generateRavelrySearchTerms(userSearchQuery) {
         fit--Accepts values related to the age, gender, fit, and ease. Do not use any values other than the following comma-separated values: ${fitList.join(
           ","
         )}
-        weight--Yarn weight, for example: DK, worsted, aran.
+        weight--Yarn weight, for example: DK, worsted, aran. Do not use any values other than the following comma-separated values: ${weightList.join(
+          ","
+        )}
         colors--Number of colors typically used for the pattern. Accepts integers 1-6
         fibertype--Fiber of the yarn suggested for the pattern, in lower case
         needles--Needle size suggested for the pattern, in mm. Example values: 2.5mm, 8.0mm
@@ -97,6 +99,8 @@ function valueIsValid(key, value) {
       return pcList.includes(value);
     case "fit":
       return fitList.includes(value);
+    case "weight":
+      return weightList.includes(value);
     default:
       // TODO validate more of the keys
       return true;

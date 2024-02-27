@@ -61,10 +61,29 @@ const pcList = [
   "pixie",
   "bonnet",
   "blanket",
-  "babyblanket", 
-  "bedspread", 
-  "throw", 
-  "other-blanket"
+  "babyblanket",
+  "bedspread",
+  "throw",
+  "other-blanket",
+  "neck-torso",
+  "bib",
+  "cape",
+  "collar",
+  "cowl",
+  "poncho",
+  "scarf",
+  "shawl-wrap",
+  "other-neck-torso",
+  "necktie",
+  "headwear",
+  "earwarmers",
+  "eyemask",
+  "hairaccessories",
+  "headband",
+  "headwrap",
+  "kerchief",
+  "snood",
+  "other-headwear"
 ];
 
 // subset of pa options
@@ -220,4 +239,19 @@ const fitList = [
   "unisex",
 ];
 
-module.exports = { paList, pcList, fitList };
+const weightList = [
+  "thread",
+  "lace",
+  "light-fingering",
+  "fingering",
+  "sport",
+  "dk",
+  "cobweb",
+  "worsted",
+  "super-bulky",
+  "aran",
+  "bulky",
+  "jumbo"
+]
+
+module.exports = { paList, pcList, fitList, weightList };
