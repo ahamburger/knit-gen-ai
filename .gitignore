@@ -9,6 +9,7 @@ client/.pnp.js
 # testing
 client/coverage
 
+client/build
 
 # misc
 .DS_Store
