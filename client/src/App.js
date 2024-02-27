@@ -3,7 +3,7 @@ import "./App.css";
 
 import { SearchResults } from "./SearchResults";
 
-const placeholderList = ["cozy winter socks", "easy colorful mittens", "warm vest for my dog", "giant cableknit sweater", "summer top for my toddler", "complicated socks", "best striped tshirt", "drop shoulder sweater", "really thick blanket"]
+const placeholderList = ["cozy winter socks", "easy colorful mittens", "warm vest for my dog", "giant cableknit sweater", "summer top for my toddler", "complicated socks", "best striped tshirt", "drop shoulder sweater", "really thick blanket", "summery dress"]
 const randomPlaceholder = placeholderList[Math.floor(Math.random() * placeholderList.length)]
 
 const baseUrl = "https://knit-gen-ai-a61a595cf707.herokuapp.com"
