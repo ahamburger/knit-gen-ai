@@ -1,6 +1,9 @@
 const OpenAI = require("openai");
 const { paList, fitList, pcList } = require("./ravelry-constants");
 
+/** keys included in the prompt */
+const validKeys = ['pc', 'pa','fit', 'weight', 'colors', 'fibertype', 'needles', 'ratings', 'difficulties', 'language']
+
 /** takes the user-inputted search term and turns it into search parameters to be sent to the Ravelry API*/
 async function generateRavelrySearchTerms(userSearchQuery) {
   const openai = new OpenAI({
@@ -64,6 +67,10 @@ async function generateRavelrySearchTerms(userSearchQuery) {
 function filterInvalidValues(chatResponse) {
   const validatedResponse = {};
   for (const key in chatResponse) {
+    if (!validKeys.includes(key)) {
+      continue;
+    }
+
     const chatResponseValue = chatResponse[key];
 
     if (Array.isArray(chatResponseValue)) {
@@ -91,7 +98,7 @@ function valueIsValid(key, value) {
     case "fit":
       return fitList.includes(value);
     default:
-      // TODO validate more of the keys; filter out invalid keys
+      // TODO validate more of the keys
       return true;
   }
 }

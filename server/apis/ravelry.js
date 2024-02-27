@@ -17,8 +17,6 @@ async function searchRavelry(searchParameters) {
   );
 
   for (const key in searchParameters) {
-    // TODO validate that value is ok for pa, pc, and fit
-
     if (Array.isArray(searchParameters[key])) {
       searchParameters[key] = searchParameters[key].join("|");
     }
