@@ -27,21 +27,24 @@ async function searchRavelry(searchParameters) {
     page_size: 10,
   });
 
+  console.log('Fetching from Ravelry with parameters', parameters)
+
   const response = await fetch(
     `${ravelryUrl}/patterns/search.json?${parameters}`,
     { method: "GET", headers: headers }
   );
+  console.log('Received response from Ravelry')
 
   parameters.delete("page_size");
   const ravelrySearchTerms = parameters.toString();
 
   try {
     const { patterns } = await response.json();
+    console.log(`Sending back ${patterns.length} patterns`)
 
     return { patterns, ravelrySearchTerms };
   } catch {
-    console.error("Error parsing response from Ravelry", response.status);
-    return { patterns: [], ravelrySearchTerms };
+    throw new Error("Error parsing response from Ravelry", response.status);
   }
 }
 
