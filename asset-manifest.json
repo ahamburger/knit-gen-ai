@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/knit-gen-ai/static/css/main.48c72450.css",
-    "main.js": "/knit-gen-ai/static/js/main.afd1c82c.js",
+    "main.css": "/knit-gen-ai/static/css/main.e63ade38.css",
+    "main.js": "/knit-gen-ai/static/js/main.1fcd6a5a.js",
     "static/js/453.5f3308f9.chunk.js": "/knit-gen-ai/static/js/453.5f3308f9.chunk.js",
     "index.html": "/knit-gen-ai/index.html",
-    "main.48c72450.css.map": "/knit-gen-ai/static/css/main.48c72450.css.map",
-    "main.afd1c82c.js.map": "/knit-gen-ai/static/js/main.afd1c82c.js.map",
+    "main.e63ade38.css.map": "/knit-gen-ai/static/css/main.e63ade38.css.map",
+    "main.1fcd6a5a.js.map": "/knit-gen-ai/static/js/main.1fcd6a5a.js.map",
     "453.5f3308f9.chunk.js.map": "/knit-gen-ai/static/js/453.5f3308f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.48c72450.css",
-    "static/js/main.afd1c82c.js"
+    "static/css/main.e63ade38.css",
+    "static/js/main.1fcd6a5a.js"
   ]
 }
