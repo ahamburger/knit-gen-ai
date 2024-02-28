@@ -22,6 +22,7 @@ const corsOptionsDelegate = function (req, callback) {
   callback(null, corsOptions) // callback expects two parameters: error and options
 }
 
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
@@ -30,11 +31,19 @@ app.get("/search", cors(corsOptionsDelegate), async (req, res) => {
   const input = req.query.input;
   if (typeof input !== 'string') {
     res.status(400).send('Invalid user input')
-    return
+    return;
   }
 
+
+  if (req.query.model && req.query.model !== 'gpt-4' && req.query.model !== 'gpt-3.5-turbo-0125') {
+    res.status(400).send('Invalid model: only "gpt-4" or "gpt-3.5-turbo-0125" accepted');
+    return;
+  }
+
+  const model = req.query.model || 'gpt-3.5-turbo-0125'
+  console.log('Using model', model)
   try {
-    const searchTerms = await generateRavelrySearchTerms(input.slice(0, 200))
+    const searchTerms = await generateRavelrySearchTerms(input.slice(0, 200), model)
     const { explanation, suggestion } = { ...searchTerms };
     delete searchTerms.explanation;
     delete searchTerms.suggestion;

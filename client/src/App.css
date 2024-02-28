@@ -1,7 +1,8 @@
 p,
 a,
 li,
-textarea {
+textarea,
+select {
   font-size: 1rem;
 }
 
@@ -51,8 +52,13 @@ footer p {
   margin: auto;
 }
 
-.Search-container button {
+.Search-container button,
+.Search-container select {
   margin: 15px auto;
+}
+
+.Search-container select {
+  margin-bottom: 0;
 }
 
 .SearchResults {

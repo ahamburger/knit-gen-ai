@@ -6,10 +6,12 @@ import { SearchResults } from "./SearchResults";
 const placeholderList = ["cozy winter socks", "easy colorful mittens", "warm vest for my dog", "giant cableknit sweater", "summer top for my toddler", "complicated socks", "best striped tshirt", "drop shoulder sweater", "really thick blanket", "summery dress"]
 const randomPlaceholder = placeholderList[Math.floor(Math.random() * placeholderList.length)]
 
-const baseUrl = "https://knit-gen-ai-a61a595cf707.herokuapp.com"
-
+const baseUrl = process.env.REACT_APP_BASE_URL || "https://knit-gen-ai-a61a595cf707.herokuapp.com"
+console.log(baseUrl)
 function App() {
   const [textareaValue, setTextAreaValue] = useState();
+  const [model, setModel] = useState("gpt-3.5-turbo-0125");
+  const [modelForLatestResults, setModelForLatestResults] = useState(undefined);
   const [searchQuery, setSearchQuery] = useState();
   const [resultsLoading, setResultsLoading] = useState(false);
   const [errorFetchingResults, setErrorFetchingResults] = useState(false);
@@ -23,13 +25,14 @@ function App() {
       return;
     }
     setSearchQuery(textareaValue);
+    setModelForLatestResults(model);
     setResultsLoading(true);
     setErrorFetchingResults(false);
     setPatterns(undefined);
     setExplanation(undefined);
     setSuggestion(undefined);
 
-    const fetchParams = new URLSearchParams({ input: textareaValue });
+    const fetchParams = new URLSearchParams({ input: textareaValue, model });
     const res = await fetch(`${baseUrl}/search?${fetchParams}`)
 
     if (res.ok) {
@@ -75,8 +78,16 @@ function App() {
             aria-label="Enter a description of a knitting pattern"
             placeholder={`Try "${randomPlaceholder}"`}
           />
+          <select name="GPT model"
+            value={model}
+            onChange={e => setModel(e.target.value)}
+          >
+            <option value="gpt-3.5-turbo-0125">gpt-3.5-turbo-0125</option>
+            <option value="gpt-4">gpt-4</option>
+          </select>
           <button onClick={onSearch}>Search</button>
         </div>
+
         <SearchResults
           searchQuery={searchQuery}
           resultsLoading={resultsLoading}
@@ -85,6 +96,7 @@ function App() {
           ravelrySearchTerms={ravelrySearchTerms}
           explanation={explanation}
           suggestion={suggestion}
+          model={modelForLatestResults}
         />
       </div>
       <footer>

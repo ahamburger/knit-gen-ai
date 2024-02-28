@@ -5,7 +5,7 @@ const { paList, fitList, pcList, weightList } = require("./ravelry-constants");
 const validKeys = ['pc', 'pa','fit', 'weight', 'colors', 'fibertype', 'needles', 'ratings', 'difficulties', 'language', 'explanation', 'suggestion', 'combinationInstructions']
 
 /** takes the user-inputted search term and turns it into search parameters to be sent to the Ravelry API*/
-async function generateRavelrySearchTerms(userSearchQuery) {
+async function generateRavelrySearchTerms(userSearchQuery, model) {
   const openai = new OpenAI({
     apiKey: process.env.REACT_APP_OPEN_AI_KEY,
   });
@@ -52,7 +52,7 @@ async function generateRavelrySearchTerms(userSearchQuery) {
       },
       { role: "user", content: userSearchQuery },
     ],
-    model: "gpt-4",
+    model,
   });
 
   if (completion.choices[0]?.finish_reason !== "stop") {
