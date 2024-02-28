@@ -6,7 +6,7 @@ import { SearchResults } from "./SearchResults";
 const placeholderList = ["cozy winter socks", "easy colorful mittens", "warm vest for my dog", "giant cableknit sweater", "summer top for my toddler", "complicated socks", "best striped tshirt", "drop shoulder sweater", "really thick blanket", "summery dress"]
 const randomPlaceholder = placeholderList[Math.floor(Math.random() * placeholderList.length)]
 
-const baseUrl = process.env.REACT_APP_BASE_URL// || "https://knit-gen-ai-a61a595cf707.herokuapp.com"
+const baseUrl = "https://knit-gen-ai-a61a595cf707.herokuapp.com"
 
 function App() {
   const [textareaValue, setTextAreaValue] = useState();
@@ -30,7 +30,7 @@ function App() {
     setSuggestion(undefined);
 
     const fetchParams = new URLSearchParams({ input: textareaValue });
-    const res = await fetch(`http://localhost:3001/search?${fetchParams}`)
+    const res = await fetch(`${baseUrl}/search?${fetchParams}`)
 
     if (res.ok) {
       try {

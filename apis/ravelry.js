@@ -2,7 +2,7 @@ const ravelryUsername = "read-881cd3edb850ed671d7c53fcfe2c51bd";
 
 const ravelryUrl = "https://api.ravelry.com";
 
-async function searchRavelry(searchParameters) {
+async function searchRavelry(searchParameters, isRetry) {
   const headers = new Headers();
 
   const ravelryKey = process.env.REACT_APP_RAVELRY_KEY;
@@ -21,7 +21,7 @@ async function searchRavelry(searchParameters) {
   for (const key in searchParameters) {
     if (Array.isArray(searchParameters[key])) {
       let joinSymbol = "|"
-      if (useCombinationInstructions && searchParameters.combinationInstructions[key] === 'AND') {
+      if (!isRetry && useCombinationInstructions && searchParameters.combinationInstructions[key] === 'AND') {
         joinSymbol = "+"
       }
       searchParameters[key] = searchParameters[key].join(joinSymbol);
@@ -44,13 +44,17 @@ async function searchRavelry(searchParameters) {
   );
   console.log('Received response from Ravelry')
 
-  parameters.delete("page_size");
-  const ravelrySearchTerms = parameters.toString();
 
   try {
     const { patterns } = await response.json();
+    if (patterns.length === 0) {
+      console.log('retrying...')
+      return searchRavelry(searchParameters, true)
+    }
     console.log(`Sending back ${patterns.length} patterns`)
 
+    parameters.delete("page_size");
+    const ravelrySearchTerms = parameters.toString();
     return { patterns, ravelrySearchTerms };
   } catch {
     throw new Error("Error parsing response from Ravelry", response.status);
