@@ -6,7 +6,7 @@ import { SearchResults } from "./SearchResults";
 const placeholderList = ["cozy winter socks", "easy colorful mittens", "warm vest for my dog", "giant cableknit sweater", "summer top for my toddler", "complicated socks", "best striped tshirt", "drop shoulder sweater", "really thick blanket", "summery dress"]
 const randomPlaceholder = placeholderList[Math.floor(Math.random() * placeholderList.length)]
 
-const baseUrl = "https://knit-gen-ai-a61a595cf707.herokuapp.com"
+const baseUrl = process.env.REACT_APP_BASE_URL// || "https://knit-gen-ai-a61a595cf707.herokuapp.com"
 
 function App() {
   const [textareaValue, setTextAreaValue] = useState();
@@ -14,6 +14,8 @@ function App() {
   const [resultsLoading, setResultsLoading] = useState(false);
   const [errorFetchingResults, setErrorFetchingResults] = useState(false);
   const [patterns, setPatterns] = useState(undefined);
+  const [suggestion, setSuggestion] = useState(undefined);
+  const [explanation, setExplanation] = useState(undefined);
   const [ravelrySearchTerms, setRavelrySearchTerms] = useState(undefined);
 
   const onSearch = async () => {
@@ -24,15 +26,19 @@ function App() {
     setResultsLoading(true);
     setErrorFetchingResults(false);
     setPatterns(undefined);
+    setExplanation(undefined);
+    setSuggestion(undefined);
 
     const fetchParams = new URLSearchParams({ input: textareaValue });
-    const res = await fetch(`${baseUrl}/search?${fetchParams}`)
+    const res = await fetch(`http://localhost:3001/search?${fetchParams}`)
 
     if (res.ok) {
       try {
-        const { patterns, ravelrySearchTerms } = await res.json();
+        const { patterns, explanation, suggestion, ravelrySearchTerms } = await res.json();
         // TODO add pagination
         setPatterns(patterns);
+        setExplanation(explanation);
+        setSuggestion(suggestion);
         setRavelrySearchTerms(ravelrySearchTerms);
       } catch (err) {
         setErrorFetchingResults(true);
@@ -77,6 +83,8 @@ function App() {
           showErrorMessage={errorFetchingResults}
           results={patterns}
           ravelrySearchTerms={ravelrySearchTerms}
+          explanation={explanation}
+          suggestion={suggestion}
         />
       </div>
       <footer>

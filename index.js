@@ -35,9 +35,13 @@ app.get("/search", cors(corsOptionsDelegate), async (req, res) => {
 
   try {
     const searchTerms = await generateRavelrySearchTerms(input.slice(0, 200))
+    const { explanation, suggestion } = { ...searchTerms };
+    delete searchTerms.explanation;
+    delete searchTerms.suggestion;
+
     const result = await searchRavelry(searchTerms)
 
-    res.json(result);
+    res.json({ ...result, explanation, suggestion });
   } catch (err) {
     res.status(500).send(err.message)
   }

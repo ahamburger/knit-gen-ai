@@ -16,14 +16,23 @@ async function searchRavelry(searchParameters) {
     "Basic " + btoa(`${ravelryUsername}:${ravelryKey}`)
   );
 
+  const useCombinationInstructions = typeof searchParameters.combinationInstructions === 'object';
+  console.log(searchParameters.combinationInstructions)
   for (const key in searchParameters) {
     if (Array.isArray(searchParameters[key])) {
-      searchParameters[key] = searchParameters[key].join("|");
+      let joinSymbol = "|"
+      if (useCombinationInstructions && searchParameters.combinationInstructions[key] === 'AND') {
+        joinSymbol = "+"
+      }
+      searchParameters[key] = searchParameters[key].join(joinSymbol);
     }
   }
 
+  delete searchParameters.combinationInstructions;
+
   const parameters = new URLSearchParams({
-    ...searchParameters,
+    ...searchParameters, 
+    craft: "knitting",
     page_size: 10,
   });
 

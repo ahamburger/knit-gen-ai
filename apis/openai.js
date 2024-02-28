@@ -2,7 +2,7 @@ const OpenAI = require("openai");
 const { paList, fitList, pcList, weightList } = require("./ravelry-constants");
 
 /** keys included in the prompt */
-const validKeys = ['pc', 'pa','fit', 'weight', 'colors', 'fibertype', 'needles', 'ratings', 'difficulties', 'language']
+const validKeys = ['pc', 'pa','fit', 'weight', 'colors', 'fibertype', 'needles', 'ratings', 'difficulties', 'language', 'explanation', 'suggestion', 'combinationInstructions']
 
 /** takes the user-inputted search term and turns it into search parameters to be sent to the Ravelry API*/
 async function generateRavelrySearchTerms(userSearchQuery) {
@@ -36,9 +36,13 @@ async function generateRavelrySearchTerms(userSearchQuery) {
         difficulties--How difficult the pattern is on an integer scale from 1-10 where 1 is easiest and 10 is impossible. 0 represents unknown difficulty
         language--two character language code. Example values: en, de, fr
         
-    Give the search terms for the Ravelry Search API based on the user inputted text. \
-    Only give the JSON blob, with no other text. \
-    Only use the keys explained above. Do not use any other keys.`;
+        Give the search terms for the Ravelry Search API based on the user inputted text.     
+        Add an "explanation" key with why you returned the other values, in just one sentence
+        Add a "combinationInstructions" key that lists each key and if the values should be combined with a logical "AND" or "OR"
+        Add a "suggestion" field with suggestions on how the user could improve their search, in one sentence. Refer to the user as You
+    
+        Only give the JSON blob, with no other text.
+  `;
 
   const completion = await openai.chat.completions.create({
     messages: [
@@ -56,11 +60,11 @@ async function generateRavelrySearchTerms(userSearchQuery) {
   }
 
   try {
-    const response = filterInvalidValues(
-      JSON.parse(completion.choices[0].message.content)
-    );
+    const response = JSON.parse(completion.choices[0].message.content)
     console.log("Chat GPT parsed response", { response });
-    return { ...response, craft: "knitting" };
+    console.log("Chat GPT fitlered response", filterInvalidValues(response));
+
+    return filterInvalidValues(response);
   } catch (err) {
     throw new Error(`Error parsing chat completion. Raw response: ${completion.choices[0]?.message?.content}`)
   }
@@ -84,6 +88,9 @@ function filterInvalidValues(chatResponse) {
       typeof chatResponseValue === "string" &&
       valueIsValid(key, chatResponseValue)
     ) {
+      validatedResponse[key] = chatResponseValue;
+    } else {
+      // todo validate "combinationInstructions"
       validatedResponse[key] = chatResponseValue;
     }
   }
