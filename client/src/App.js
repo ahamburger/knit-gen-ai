@@ -7,10 +7,16 @@ const placeholderList = ["cozy winter socks", "easy colorful mittens", "warm ves
 const randomPlaceholder = placeholderList[Math.floor(Math.random() * placeholderList.length)]
 
 const baseUrl = process.env.REACT_APP_BASE_URL || "https://knit-gen-ai-a61a595cf707.herokuapp.com"
-console.log(baseUrl)
+
+const modelKeyToUserReadableStr = {
+  "gpt-3.5-turbo-0125-function": "gpt-3.5-turbo-0125, prompt + function",
+  "gpt-3.5-turbo-0125": "gpt-3.5-turbo-0125, prompt only",
+  "gpt-4": "gpt-4, prompt only",
+}
+
 function App() {
   const [textareaValue, setTextAreaValue] = useState();
-  const [model, setModel] = useState("gpt-3.5-turbo-0125");
+  const [model, setModel] = useState("gpt-3.5-turbo-0125-function");
   const [modelForLatestResults, setModelForLatestResults] = useState(undefined);
   const [searchQuery, setSearchQuery] = useState();
   const [resultsLoading, setResultsLoading] = useState(false);
@@ -82,8 +88,9 @@ function App() {
             value={model}
             onChange={e => setModel(e.target.value)}
           >
-            <option value="gpt-3.5-turbo-0125">gpt-3.5-turbo-0125</option>
-            <option value="gpt-4">gpt-4</option>
+            {Object.keys(modelKeyToUserReadableStr).map((k) =>
+              (<option value={k}>{modelKeyToUserReadableStr[k]}</option>)
+            )}
           </select>
           <button onClick={onSearch}>Search</button>
         </div>
@@ -96,7 +103,7 @@ function App() {
           ravelrySearchTerms={ravelrySearchTerms}
           explanation={explanation}
           suggestion={suggestion}
-          model={modelForLatestResults}
+          model={modelKeyToUserReadableStr[modelForLatestResults]}
         />
       </div>
       <footer>

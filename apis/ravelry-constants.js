@@ -83,7 +83,7 @@ const pcList = [
   "headwrap",
   "kerchief",
   "snood",
-  "other-headwear"
+  "other-headwear",
 ];
 
 // subset of pa options
@@ -251,7 +251,36 @@ const weightList = [
   "super-bulky",
   "aran",
   "bulky",
-  "jumbo"
-]
+  "jumbo",
+];
 
-module.exports = { paList, pcList, fitList, weightList };
+const fiberList = [
+  "acrylic",
+  "alpaca",
+  "angora",
+  "bamboo",
+  "bison",
+  "camel",
+  "llama",
+  "linen",
+  "cotton",
+  "hemp",
+  "cashmere",
+  "merino",
+  "microfiber",
+  "metallic",
+  "mohair",
+  "nylon",
+  "other",
+  "polyester",
+  "plant-fiber",
+  "qiviut",
+  "rayon",
+  "silk",
+  "soy",
+  "tencel",
+  "wool",
+  "yak",
+];
+
+module.exports = { paList, pcList, fitList, weightList, fiberList };

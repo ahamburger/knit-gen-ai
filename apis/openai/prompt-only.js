@@ -1,5 +1,5 @@
 const OpenAI = require("openai");
-const { paList, fitList, pcList, weightList } = require("./ravelry-constants");
+const { paList, fitList, pcList, weightList, fiberList } = require("../ravelry-constants");
 
 /** keys included in the prompt */
 const validKeys = ['pc', 'pa','fit', 'weight', 'colors', 'fibertype', 'needles', 'ratings', 'difficulties', 'language', 'explanation', 'suggestion', 'combinationInstructions']
@@ -14,7 +14,7 @@ async function generateRavelrySearchTerms(userSearchQuery, model) {
 
   For example if someone asks for "comfy" consider things like the fit, yarn fiber and/or needle size that would make a sweater comfy 
 
-    Here are the allowed keys in the JSON. All of the keys accept a list of strings. I will list them as follows key---description 
+    Here are the allowed keys in the JSON. All of the keys accept a list of strings. 
     
     I will list them as follows key---description 
         pc---Stands for pattern category, the kind of object the user wants to make. Do not use any values other than the following comma-separated values ${pcList.join(
@@ -30,7 +30,9 @@ async function generateRavelrySearchTerms(userSearchQuery, model) {
           ","
         )}
         colors--Number of colors typically used for the pattern. Accepts integers 1-6
-        fibertype--Fiber of the yarn suggested for the pattern, in lower case
+        fibertype--Fiber of the yarn suggested for the pattern, in lower case. Do not use any values other than the following: ${fiberList.join(
+          ","
+        )}
         needles--Needle size suggested for the pattern, in mm. Example values: 2.5mm, 8.0mm
         ratings--User ratings, on an integer scale of 0-5, where 5 is the best
         difficulties--How difficult the pattern is on an integer scale from 1-10 where 1 is easiest and 10 is impossible. 0 represents unknown difficulty
@@ -108,6 +110,8 @@ function valueIsValid(key, value) {
       return fitList.includes(value);
     case "weight":
       return weightList.includes(value);
+    case "fibertype":
+      return fiberList.includes(value)
     default:
       // TODO validate more of the keys
       return true;
