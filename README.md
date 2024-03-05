@@ -9,4 +9,6 @@ Under the hood, the inputted description is being passed through ChatGPT to gene
 
 ### Motivation
 
-My goal was to create a simple "Hello, World" project to get a sense of how to implement prompt engineering with the OpenAI APIs. 
+My goal was to create a simple "Hello, World" project with the OpenAI APIs. 
+
+Via the UI, you can toggle between using `gpt-3.5-turbo-0125` (labeled "gpt-3.5-turbo-0125, prompt only" in the UI), `gpt-4` (labeled "gpt-4, prompt only" in the UI), or `gpt-3.5-0125` where the prompt makes use of the OpenAI [function calling feature](https://platform.openai.com/docs/guides/function-calling?lang=node.js) (labeled "gpt-3.5-turbo-0125, prompt + function" in the UI). Read more about my learnings in [tradeoffs.md](./tradeoffs.md)
