@@ -2,7 +2,7 @@ const OpenAI = require("openai");
 const { paList, fitList, pcList, weightList, fiberList } = require("../ravelry-constants");
 
 /** keys included in the prompt */
-const validKeys = ['pc', 'pa','fit', 'weight', 'colors', 'fibertype', 'needles', 'ratings', 'difficulties', 'language', 'explanation', 'suggestion', 'combinationInstructions']
+const validKeys = ['pc', 'pa','fit', 'weight', 'colors', 'fibertype', 'needles', 'ratings', 'difficulties', 'language', 'explanation', 'suggestion']
 
 /** takes the user-inputted search term and turns it into search parameters to be sent to the Ravelry API*/
 async function generateRavelrySearchTerms(userSearchQuery, model) {
@@ -40,7 +40,6 @@ async function generateRavelrySearchTerms(userSearchQuery, model) {
         
         Give the search terms for the Ravelry Search API based on the user inputted text.     
         Add an "explanation" key with why you returned the other values, in just one sentence
-        Add a "combinationInstructions" key that lists each key and if the values should be combined with a logical "AND" or "OR"
         Add a "suggestion" field with suggestions on how the user could improve their search, in one sentence. Refer to the user as You
     
         Only give the JSON blob, with no other text.
@@ -92,7 +91,6 @@ function filterInvalidValues(chatResponse) {
     ) {
       validatedResponse[key] = chatResponseValue;
     } else {
-      // todo validate "combinationInstructions"
       validatedResponse[key] = chatResponseValue;
     }
   }
