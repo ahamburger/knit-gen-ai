@@ -2,7 +2,7 @@
 
 One thing I wanted to better understand via this project was the tradeoffs between more verbose prompting, quality, and cost.
 
-An important takeaway was that using GPT 3.5 with the OpenAI [function calling feature](https://platform.openai.com/docs/guides/function-calling?lang=node.js) resulted in similar quality for this task as using GPT 4.0 (without a function call), and is much more economical.
+An important takeaway was that using GPT 3.5 with the OpenAI [function calling feature](https://platform.openai.com/docs/guides/function-calling?lang=node.js) resulted in significantly better quality for this task than using GPT 3.5 alone and is much more economical than using GPT 4.0. 
 
 If this app had 100 user queries a day, the yearly cost for just the inputs would be roughly:
 * **$1495.77** using prompt engineering alone with gpt-4  
@@ -45,7 +45,13 @@ gpt-4, prompt only => $0.04098 * 100 * 365 = $1495.77
 
 gpt-3.5-turbo-0125, prompt + function => $0.00097 * 100 * 365 = $35.40
 
-So the extra prompt tokens for using a function are certainly worth it, to get away with using GPT 3.5 instead of GPT 4.0 at a similar quality level.
+So the extra prompt tokens for using a function are certainly worth it, if we can get away with using GPT 3.5 instead of GPT 4.0 at a similar quality level.
+
+### Quality
+
+The more explicit syntax does help GPT 3.5 follow the instructions better -- there are fewer terms filtered out just because they are using the wrong format. The quality is significantly better than using GPT 3.5 alone. It's hard to say if it's as good as using GPT 4.0, but perhaps the quality is good enough, given the cost benefits.
+
+But there's more finagling that could/should be done. With the function, now it seems like GPT 3.5 makes results overly specific, attempting to specify every single key because the keys are all marked as `required`. Marking them all as optional results in too broad of a search, like it was before the function was introduced. The next thing I would try would be to adjust the string system prompt a bit more or to just mark some of the keys as required, and see if it still uses the optional ones when appropriate.
 
 ### Code clarity
 
